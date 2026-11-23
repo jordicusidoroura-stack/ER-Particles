@@ -1,0 +1,8 @@
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+sparc_rotmod/
+synthetic/
+*.png
+*.html
+!docs/img/*.png

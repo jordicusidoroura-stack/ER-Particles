@@ -8,15 +8,64 @@ It is a companion to the educational course [quantum-vacuum-journey](https://git
 
 ## The result in one paragraph
 
-Rotating galaxies are well described by a law of Bose–Einstein form,
+Rotating galaxies are well described by a law of Bose–Einstein form whose only scale is set by the temperature of the cosmic horizon, with no free acceleration parameter. On 149 SPARC galaxies the fitted scale is $s \approx 0.93 \times 10^{-10}\ \mathrm{m\,s^{-2}}$. A version with the scale fixed in advance predicts held-out galaxies as well as a fitted one. The correction vanishes in the Solar System, and published intermediate-redshift data (MUSE-DARK, 2026) reject a constant scale and are compatible with $s \propto H(z)$.
 
-```
-a = g_N / (1 − exp(−√(g_N / s)))        with   s(z) = c·H(z) / 2π
-```
+**What is not new:** the functional form is the empirical radial acceleration relation (McGaugh, Lelli & Schombert 2016), the coincidence $a_0 \approx cH_0/2\pi$ is Milgrom's, and the evolution with $H(z)$ has been proposed and measured by others. What this project adds is a thermal reading that links them, a systematic pre-registered comparison of laws and scales, and the whole path, failures included, in reproducible form.
 
-where g_N is the Newtonian acceleration of the visible matter and s is fixed by the temperature ħH/2π of the cosmic apparent horizon, with no free acceleration parameter. On 149 SPARC galaxies the fitted scale is s ≈ 0.93 × 10⁻¹⁰ m/s² (0.89 × cH₀/2π). A version with that scale fixed in advance predicts held-out galaxies as well as a fitted one. The correction vanishes in the Solar System (≈10⁻³⁸² m/s² at Saturn). Published intermediate-redshift data (MUSE-DARK, 2026) reject a constant scale and are compatible with s ∝ H(z).
+## The idea in four equations
 
-**What is not new:** the functional form is the empirical radial acceleration relation (McGaugh, Lelli & Schombert 2016), the coincidence a₀ ≈ cH₀/2π is Milgrom's, and the evolution with H(z) has been proposed and measured by others. What this project adds is a thermal reading that links them, a systematic pre-registered comparison of laws and scales, and the whole path, failures included, in reproducible form.
+**1. Horizons have a temperature.** An observer with acceleration $a$ sees the vacuum as a thermal bath (Unruh). In a universe with a cosmological constant, the temperature combines the observer's acceleration with the de Sitter horizon (Deser & Levin 1997):
+
+$$
+2\pi\,\frac{c\,k_B T}{\hbar} = \sqrt{a^2 + a_\Lambda^2}, \qquad a_\Lambda = c\sqrt{\Lambda/3}.
+$$
+
+In ER=EPR language, that temperature *is* entanglement across the horizon.
+
+**2. Galaxies follow a Bose–Einstein occupation.** With $g_N$ the Newtonian acceleration of the visible matter and $x = \sqrt{g_N/s}$:
+
+$$
+a = \frac{g_N}{1 - e^{-x}} = g_N\,\bigl[1 + n_{BE}(x)\bigr], \qquad n_{BE}(x) = \frac{1}{e^{x} - 1}.
+$$
+
+When gravity is weak ($x \ll 1$) this gives $a \to \sqrt{s\,g_N}$: flat rotation curves and the baryonic Tully–Fisher relation $v^4 = G M s$. When gravity is strong ($x \gg 1$) the correction dies as $e^{-x}$, like a cold bath.
+
+**3. The scale is the temperature of the cosmic apparent horizon** (Cai & Kim 2005):
+
+$$
+k_B T_H = \frac{\hbar H}{2\pi} \quad\Longrightarrow\quad s(z) = \frac{c\,H(z)}{2\pi}, \qquad s(0) = 1.04 \times 10^{-10}\ \mathrm{m\,s^{-2}}.
+$$
+
+**4. A falsifiable prediction.** With $E(z) = H(z)/H_0 = \sqrt{\Omega_m (1+z)^3 + \Omega_\Lambda}$, the scale and the Tully–Fisher zero point evolve as
+
+$$
+\frac{s(z)}{s(0)} = E(z), \qquad \Delta \log v_f\big|_{M} = \tfrac14 \log E(z), \qquad \Delta \log M\big|_{v_f} = -\log E(z).
+$$
+
+At $z = 2$ that is a scale three times larger and galaxies 0.48 dex lighter at fixed rotation speed. A constant scale, $s = c\sqrt{\Lambda/3}/2\pi$, predicts no change.
+
+## The evidence in three figures
+
+**Why a thermal law.** All four candidate laws behave alike in galaxies, but only the thermal ones switch off where gravity is strong. Laws that never switch off add about $10^{-10}\ \mathrm{m\,s^{-2}}$ at Saturn's orbit, far above what planetary ephemerides allow; the Bose law adds about $10^{-382}\ \mathrm{m\,s^{-2}}$. In SPARC the Bose form also beats the classical (Boltzmann) occupation by $\Delta\mathrm{BIC} \approx 560$.
+
+![Extra acceleration against Newtonian acceleration for the four laws](docs/img/leyes_apagado.png)
+
+**The mass model matters.** Giving each galaxy its own bulge mass, distance and inclination (model M2) flattens the residuals of the Bose law to within ±0.012 dex. It also shows that local galaxies alone cannot tell $c\sqrt{\Lambda/3}/2\pi$ from $cH_0/2\pi$: the difference is $\Delta\chi^2 \approx 7$ and changes sign with the stellar mass-to-light prior.
+
+![Median residual of the Bose law against Newtonian acceleration for mass models M0, M1 and M2](docs/img/residuos_modelo_de_masa.png)
+
+**Redshift decides.** With a free amplitude, a constant scale fails on the MUSE-DARK bins ($p = 2 \times 10^{-6}$ if the error bars are 1σ), while $s \propto H(z)$ passes ($p = 0.14$). The fitted amplitude, 1.33, is the open problem: SPARC matches $cH_0/2\pi$ without it.
+
+![Acceleration scale against redshift: MUSE-DARK bins, SPARC point and the two variants](docs/img/escala_redshift.png)
+
+| Test (notebooks 12–13) | Result |
+|---|---|
+| Bose vs. laws that never switch off (SPARC, mass model M2) | Bose better by $\Delta\chi^2 = 17$ |
+| Held-out galaxies, $s$ fixed to a cosmological value, nothing fitted | as good as a fitted RAR ($p_{\text{worse}} = 0.68$) |
+| Robustness of $s$ to the stellar mass-to-light prior (0.4–0.6) | within 10% |
+| Solar System anomaly at Saturn | $\sim 10^{-382}\ \mathrm{m\,s^{-2}}$ |
+| Constant scale vs. MUSE-DARK | rejected |
+| $s \propto H(z)$ vs. MUSE-DARK | compatible if error bars are 1σ |
 
 ## The path, notebook by notebook
 
